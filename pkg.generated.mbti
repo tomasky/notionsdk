@@ -1,0 +1,415 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "kupas/notionsdk"
+
+import {
+  "kupas/notionsdk/api-endpoints",
+}
+
+// Values
+pub fn api_response_error(code~ : APIErrorCode, message~ : String, status~ : Int, headers~ : Array[(String, String)], body~ : String, additional_data? : Json?, request_id? : String?) -> NotionError
+
+pub fn browser_token_not_allowed_error() -> NotionError
+
+pub fn build_request_error(HttpResponse, String) -> NotionClientError
+
+pub fn build_unknown_response_message(status~ : Int, content_type~ : String?, ray_id~ : String?, request_id~ : String?) -> String
+
+pub fn bytes_to_hex(BytesView) -> String
+
+pub fn can_retry(NotionError, String) -> Bool
+
+pub fn collect_all_data_source_rows(Client, Json) -> Array[Json] raise
+
+pub fn collect_data_source_templates(Client, Json) -> Array[Json] raise
+
+pub fn collect_paginated_api((Json) -> Json raise, Json) -> Array[Json] raise
+
+pub let default_base_url : String
+
+pub fn default_fetch(String, HttpRequestInit) -> HttpResponse raise
+
+pub let default_initial_retry_delay_ms : Int
+
+pub let default_max_retries : Int
+
+pub let default_max_retry_delay_ms : Int
+
+pub let default_notion_version : String
+
+pub let default_timeout_ms : Int
+
+pub fn encode_uri_component(String) -> String
+
+pub fn extract_block_id(String) -> String?
+
+pub fn extract_database_id(String) -> String?
+
+pub fn extract_notion_id(String) -> String?
+
+pub fn extract_page_id(String) -> String?
+
+pub fn get_response_header(Array[(String, String)], String) -> String?
+
+pub fn get_unknown_params(Json, @api-endpoints.EndpointDefinition) -> Array[String]
+
+pub fn hmac_sha256(BytesView, BytesView) -> Bytes
+
+pub fn invalid_path_parameter_error(message? : String) -> NotionError
+
+pub fn is_api_error_code(String) -> Bool
+
+pub fn is_api_response_error(Error) -> Bool
+
+pub fn is_equation_rich_text_item_response(Json) -> Bool
+
+pub fn is_full_block(Json) -> Bool
+
+pub fn is_full_comment(Json) -> Bool
+
+pub fn is_full_data_source(Json) -> Bool
+
+pub fn is_full_database(Json) -> Bool
+
+pub fn is_full_page(Json) -> Bool
+
+pub fn is_full_page_or_data_source(Json) -> Bool
+
+pub fn is_full_user(Json) -> Bool
+
+pub fn is_full_view(Json) -> Bool
+
+pub fn is_http_response_error(Error) -> Bool
+
+pub fn is_mention_rich_text_item_response(Json) -> Bool
+
+pub fn is_notion_client_error(Error) -> Bool
+
+pub fn is_object(Json) -> Bool
+
+pub fn is_text_rich_text_item_response(Json) -> Bool
+
+pub fn iterate_all_data_source_rows(Client, Json) -> Array[Json] raise
+
+pub fn iterate_data_source_templates(Client, Json) -> Array[Json] raise
+
+pub fn iterate_paginated_api((Json) -> Json raise, Json) -> Array[Json] raise
+
+pub fn log_level_severity(LogLevel) -> Int
+
+pub fn make_console_logger(String) -> (LogLevel, String, Json) -> Unit
+
+pub let min_view_column_width : Int
+
+pub fn parse_api_error_response_body(String) -> ParsedAPIError?
+
+pub fn parse_paginated_list(Json) -> PaginatedList
+
+pub fn parse_retry_after_header(Array[(String, String)]) -> Int?
+
+pub fn parse_session_stream_event(SseFrame) -> Json raise
+
+pub fn parse_sse_frame(String) -> SseFrame? raise
+
+pub fn pick(Json, ArrayView[String]) -> Json
+
+pub fn request_timeout_error(message? : String) -> NotionError
+
+pub let sdk_version : String
+
+pub let session_stream_event_types : Array[String]
+
+pub fn set_start_cursor(Json, String?) -> Json
+
+pub fn sha256_bytes(BytesView) -> Bytes
+
+pub fn sign_webhook_payload(String, String) -> String
+
+pub fn take_sse_frames(String, Bool) -> SseFrames raise
+
+pub fn unknown_http_response_error(status~ : Int, headers~ : Array[(String, String)], body~ : String, message? : String?) -> NotionError
+
+pub fn validate_request_path(String) -> Unit raise
+
+pub fn verify_webhook_signature(VerifyWebhookSignatureArgs) -> Bool
+
+// Errors
+pub(all) suberror NotionClientError {
+  NotionClientError(NotionError)
+}
+
+// Types and methods
+pub(all) enum APIErrorCode {
+  Unauthorized
+  RestrictedResource
+  ObjectNotFound
+  RateLimited
+  InvalidJson
+  InvalidRequestUrl
+  InvalidRequest
+  InvalidBeta
+  ValidationError
+  ConflictError
+  InternalServerError
+  ServiceOverload
+  ServiceUnavailable
+  GatewayTimeout
+}
+pub fn APIErrorCode::from_string(String) -> Self?
+pub fn APIErrorCode::to_string(Self) -> String
+
+pub struct AgentsEndpointMethods {
+  query : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+  delete : (Json) -> Json raise
+  retrieve_insights : (Json) -> Json raise
+  update_status : (Json) -> Json raise
+  update_credit_limit : (Json) -> Json raise
+  batch : (Json) -> Json raise
+}
+
+pub struct AsyncTasksEndpointMethods {
+  retrieve : (Json) -> Json raise
+}
+
+pub struct BlocksEndpointMethods {
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  delete : (Json) -> Json raise
+  children_list : (Json) -> Json raise
+  children_append : (Json) -> Json raise
+  meeting_notes_create : (Json) -> Json raise
+  meeting_notes_query : (Json) -> Json raise
+}
+
+pub struct Client {
+  // private fields
+}
+pub fn Client::agents(Self) -> AgentsEndpointMethods
+pub fn Client::async_tasks(Self) -> AsyncTasksEndpointMethods
+pub fn Client::blocks(Self) -> BlocksEndpointMethods
+pub fn Client::comments(Self) -> CommentsEndpointMethods
+pub fn Client::data_sources(Self) -> DataSourcesEndpointMethods
+pub fn Client::databases(Self) -> DatabasesEndpointMethods
+pub fn Client::file_uploads(Self) -> FileUploadsEndpointMethods
+pub fn Client::new(options? : ClientOptions) -> Self
+pub fn Client::oauth(Self) -> OauthEndpointMethods
+pub fn Client::pages(Self) -> PagesEndpointMethods
+pub fn Client::plugins(Self) -> PluginsEndpointMethods
+pub fn Client::request(Self, RequestParameters) -> Json raise
+pub fn Client::search(Self) -> SearchEndpointMethods
+pub fn Client::sessions(Self) -> SessionsEndpointMethods
+pub fn Client::skills(Self) -> SkillsEndpointMethods
+pub fn Client::stream_request(Self, RequestParameters, (SseFrame) -> Json raise) -> Array[Json] raise
+pub fn Client::users(Self) -> UsersEndpointMethods
+pub fn Client::views(Self) -> ViewsEndpointMethods
+
+pub(all) enum ClientErrorCode {
+  RequestTimeout
+  ResponseError
+  InvalidPathParameter
+}
+pub fn ClientErrorCode::to_string(Self) -> String
+
+pub(all) struct ClientOptions {
+  auth : String?
+  timeout_ms : Int
+  base_url : String
+  log_level : LogLevel
+  logger : ((LogLevel, String, Json) -> Unit)?
+  notion_version : String
+  fetch : ((String, HttpRequestInit) -> HttpResponse raise)?
+  retry : Bool?
+  max_retries : Int
+  initial_retry_delay_ms : Int
+  max_retry_delay_ms : Int
+  dangerously_allow_browser : Bool
+  browser_environment : Bool
+  sleep : ((Int) -> Unit)?
+  random : (() -> Double)?
+}
+pub fn ClientOptions::new(auth? : String?, timeout_ms? : Int, base_url? : String, log_level? : LogLevel, logger? : ((LogLevel, String, Json) -> Unit)?, notion_version? : String, fetch? : ((String, HttpRequestInit) -> HttpResponse raise)?, retry? : Bool?, max_retries? : Int, initial_retry_delay_ms? : Int, max_retry_delay_ms? : Int, dangerously_allow_browser? : Bool, browser_environment? : Bool, sleep? : ((Int) -> Unit)?, random? : (() -> Double)?) -> Self
+
+pub struct CommentsEndpointMethods {
+  create : (Json) -> Json raise
+  list : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  delete : (Json) -> Json raise
+}
+
+pub struct DataSourcesEndpointMethods {
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  query : (Json) -> Json raise
+  create : (Json) -> Json raise
+  list_templates : (Json) -> Json raise
+}
+
+pub struct DatabasesEndpointMethods {
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  create : (Json) -> Json raise
+}
+
+pub struct FileUploadsEndpointMethods {
+  create : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+  list : (Json) -> Json raise
+  send : (Json) -> Json raise
+  complete : (Json) -> Json raise
+}
+
+pub(all) struct HttpRequestInit {
+  http_method : String
+  headers : Array[(String, String)]
+  body : String?
+  timeout_ms : Int
+  agent : String?
+}
+
+pub(all) struct HttpResponse {
+  ok : Bool
+  status : Int
+  headers : Array[(String, String)]
+  text : () -> String
+}
+pub fn HttpResponse::from_text(status~ : Int, headers~ : Array[(String, String)], body~ : String) -> Self
+
+pub(all) enum LogLevel {
+  Debug
+  Info
+  Warn
+  Error
+}
+pub fn LogLevel::from_string(String) -> Self?
+pub fn LogLevel::to_string(Self) -> String
+
+pub(all) struct NotionError {
+  kind : NotionErrorKind
+  code : String
+  message : String
+  status : Int
+  headers : Array[(String, String)]
+  body : String
+  additional_data : Json?
+  request_id : String?
+  ray_id : String?
+}
+pub fn NotionError::name(Self) -> String
+pub fn NotionError::new(kind~ : NotionErrorKind, code~ : String, message~ : String, status? : Int, headers? : Array[(String, String)], body? : String, additional_data? : Json?, request_id? : String?, ray_id? : String?) -> Self
+
+pub(all) enum NotionErrorKind {
+  RequestTimeoutError
+  UnknownHTTPResponseError
+  ApiResponseError
+  InvalidPathParameterError
+  BrowserTokenNotAllowedError
+}
+pub fn NotionErrorKind::name(Self) -> String
+
+pub struct OauthEndpointMethods {
+  token : (Json) -> Json raise
+  introspect : (Json) -> Json raise
+  revoke : (Json) -> Json raise
+}
+
+pub struct PagesEndpointMethods {
+  create : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  move_page : (Json) -> Json raise
+  retrieve_markdown : (Json) -> Json raise
+  update_markdown : (Json) -> Json raise
+  properties_retrieve : (Json) -> Json raise
+}
+
+pub(all) struct PaginatedList {
+  results : Array[Json]
+  next_cursor : String?
+  has_more : Bool
+}
+
+pub(all) struct ParsedAPIError {
+  code : APIErrorCode
+  message : String
+  additional_data : Json?
+  request_id : String?
+}
+
+pub struct PluginsEndpointMethods {
+  list : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+}
+
+pub(all) enum RequestAuth {
+  Bearer(String)
+  Basic(client_id~ : String, client_secret~ : String)
+}
+
+pub(all) struct RequestParameters {
+  path : String
+  http_method : String
+  query : Json?
+  body : Json?
+  form_data_params : Json?
+  headers : Array[(String, String)]
+  auth : RequestAuth?
+}
+pub fn RequestParameters::new(path~ : String, http_method~ : String, query? : Json?, body? : Json?, form_data_params? : Json?, headers? : Array[(String, String)], auth? : RequestAuth?) -> Self
+
+pub struct SearchEndpointMethods {
+  search : (Json) -> Json raise
+}
+
+pub struct SessionsEndpointMethods {
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  stream : (Json) -> Array[Json] raise
+  cancel : (Json) -> Json raise
+  query : (Json) -> Json raise
+  query_events : (Json) -> Json raise
+}
+
+pub struct SkillsEndpointMethods {
+  retrieve : (Json) -> Json raise
+}
+
+pub(all) struct SseFrame {
+  event_name : String
+  data : String
+}
+
+pub(all) struct SseFrames {
+  frames : Array[SseFrame]
+  remaining : String
+}
+
+pub struct UsersEndpointMethods {
+  me : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+  list : (Json) -> Json raise
+}
+
+pub(all) struct VerifyWebhookSignatureArgs {
+  body : String
+  signature : String?
+  verification_token : String
+}
+
+pub struct ViewsEndpointMethods {
+  list : (Json) -> Json raise
+  create : (Json) -> Json raise
+  retrieve : (Json) -> Json raise
+  update : (Json) -> Json raise
+  delete : (Json) -> Json raise
+  queries_create : (Json) -> Json raise
+  queries_results : (Json) -> Json raise
+  queries_delete : (Json) -> Json raise
+}
+
+// Type aliases
+pub type Fetch = (String, HttpRequestInit) -> HttpResponse raise
+
+pub type Logger = (LogLevel, String, Json) -> Unit
+
+// Traits

@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+  "moonbitlang/core/math",
+  "moonbitlang/core/encoding/base64",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/random",
+  "kupas/notionsdk/api-endpoints" @endpoints,
+}

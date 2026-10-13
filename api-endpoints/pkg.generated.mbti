@@ -1,0 +1,187 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "kupas/notionsdk/api-endpoints"
+
+// Values
+pub let agentBatch : EndpointDefinition
+
+pub let appendBlockChildren : EndpointDefinition
+
+pub let cancelSession : EndpointDefinition
+
+pub let chatWithAgent : EndpointDefinition
+
+pub let completeFileUpload : EndpointDefinition
+
+pub let continueThread : EndpointDefinition
+
+pub let createComment : EndpointDefinition
+
+pub let createDataSource : EndpointDefinition
+
+pub let createDatabase : EndpointDefinition
+
+pub let createExternalAgentStubVault : EndpointDefinition
+
+pub let createFileUpload : EndpointDefinition
+
+pub let createMeetingNote : EndpointDefinition
+
+pub let createPage : EndpointDefinition
+
+pub let createView : EndpointDefinition
+
+pub let createViewQuery : EndpointDefinition
+
+pub let deleteAgent : EndpointDefinition
+
+pub let deleteBlock : EndpointDefinition
+
+pub let deleteComment : EndpointDefinition
+
+pub let deleteExternalAgentStubVault : EndpointDefinition
+
+pub let deleteView : EndpointDefinition
+
+pub let deleteViewQuery : EndpointDefinition
+
+pub let getAgent : EndpointDefinition
+
+pub let getAsyncTask : EndpointDefinition
+
+pub let getBlock : EndpointDefinition
+
+pub let getComment : EndpointDefinition
+
+pub let getDataSource : EndpointDefinition
+
+pub let getDatabase : EndpointDefinition
+
+pub let getFileUpload : EndpointDefinition
+
+pub let getInsights : EndpointDefinition
+
+pub let getPage : EndpointDefinition
+
+pub let getPageMarkdown : EndpointDefinition
+
+pub let getPageProperty : EndpointDefinition
+
+pub let getPluginDirectory : EndpointDefinition
+
+pub let getSelf : EndpointDefinition
+
+pub let getSkillDirectory : EndpointDefinition
+
+pub let getUser : EndpointDefinition
+
+pub let getView : EndpointDefinition
+
+pub let getViewQueryResults : EndpointDefinition
+
+pub let listAgents : EndpointDefinition
+
+pub let listBlockChildren : EndpointDefinition
+
+pub let listComments : EndpointDefinition
+
+pub let listCustomEmojis : EndpointDefinition
+
+pub let listDataSourceTemplates : EndpointDefinition
+
+pub let listDatabaseViews : EndpointDefinition
+
+pub let listExternalAgentStubSessionEvents : EndpointDefinition
+
+pub let listFileUploads : EndpointDefinition
+
+pub let listSkillsPlugins : EndpointDefinition
+
+pub let listThreadMessages : EndpointDefinition
+
+pub let listThreads : EndpointDefinition
+
+pub let listUsers : EndpointDefinition
+
+pub let movePage : EndpointDefinition
+
+pub fn number_to_string(Double) -> String
+
+pub let oauthIntrospect : EndpointDefinition
+
+pub let oauthRevoke : EndpointDefinition
+
+pub let oauthToken : EndpointDefinition
+
+pub fn path_param(Json, String) -> String raise
+
+pub let queryAgents : EndpointDefinition
+
+pub let queryDataSource : EndpointDefinition
+
+pub let queryMeetingNotes : EndpointDefinition
+
+pub let querySessionEvents : EndpointDefinition
+
+pub let querySessions : EndpointDefinition
+
+pub let queryThreadMessages : EndpointDefinition
+
+pub let queryThreads : EndpointDefinition
+
+pub let retrieveSession : EndpointDefinition
+
+pub let search : EndpointDefinition
+
+pub let sendExternalAgentStubSessionMessage : EndpointDefinition
+
+pub let sendFileUpload : EndpointDefinition
+
+pub let sendThreadMessage : EndpointDefinition
+
+pub let startExternalAgentStubSession : EndpointDefinition
+
+pub let updateAgentCreditLimit : EndpointDefinition
+
+pub let updateAgentStatus : EndpointDefinition
+
+pub let updateBlock : EndpointDefinition
+
+pub let updateComment : EndpointDefinition
+
+pub let updateDataSource : EndpointDefinition
+
+pub let updateDatabase : EndpointDefinition
+
+pub let updateExternalAgentStubVault : EndpointDefinition
+
+pub let updatePage : EndpointDefinition
+
+pub let updatePageMarkdown : EndpointDefinition
+
+pub let updateSession : EndpointDefinition
+
+pub let updateSessionStream : EndpointDefinition
+
+pub let updateView : EndpointDefinition
+
+// Errors
+pub(all) suberror EndpointParameterError {
+  EndpointParameterError(String)
+}
+
+// Types and methods
+pub(all) struct EndpointDefinition {
+  http_method : String
+  path_params : Array[String]
+  query_params : Array[String]
+  body_params : Array[String]
+  form_data_params : Array[String]
+  headers : Array[(String, String)]
+  path : (Json) -> String raise
+  optional : Bool
+}
+pub fn EndpointDefinition::new(http_method~ : String, path~ : (Json) -> String raise, path_params? : Array[String], query_params? : Array[String], body_params? : Array[String], form_data_params? : Array[String], headers? : Array[(String, String)], optional? : Bool) -> Self
+
+// Type aliases
+
+// Traits
